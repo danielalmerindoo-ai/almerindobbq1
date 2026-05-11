@@ -1435,7 +1435,59 @@
     `;
   }
 
-  // ── BUSCA DE CEP (ViaCEP) ──
+  // ── ENVIO WHATSAPP ──
+  function enviarWhatsApp() {
+    const tipo   = document.getElementById('tipo').value;
+    const data   = document.getElementById('data').value;
+    const qtd    = document.getElementById('qtd').value;
+    const cidade = document.getElementById('cidade').value;
+    const bairro = document.getElementById('bairro').value;
+    const rua    = document.getElementById('rua').value;
+    const numero = document.getElementById('numero').value;
+    const compl  = document.getElementById('complemento').value;
+    const estado = document.getElementById('estado').value;
+    const nome   = document.getElementById('nome').value;
+    const tel    = document.getElementById('telefone').value;
+    const obs    = document.getElementById('obs').value;
+    const cortes = [...document.querySelectorAll('#f-cortes .cut-item.selected')]
+                     .map(el => el.querySelector('input').value).join(', ');
+    const dataFmt = data ? new Date(data + 'T12:00:00').toLocaleDateString('pt-BR') : '—';
+    const calc = calcPrice();
+    const porPessoa = Math.round(calc.total / parseInt(qtd));
+
+    const endereco = `${rua}${numero ? ', ' + numero : ''}${compl ? ' ' + compl : ''} — ${bairro}${cidade ? ', ' + cidade + '/' + estado : ''}`;
+
+    const msg = `*ORCAMENTO ALMERINDO BBQ*
+
+*Nome:* ${nome}
+*WhatsApp:* ${tel}
+
+*EVENTO*
+- Tipo: ${tipo}
+- Data: ${dataFmt}
+- Horario: ${state.horario || '-'}
+- Duracao: ${state.duracao || '-'}
+- Convidados: ${qtd} pessoas
+
+*CARDAPIO*
+- Cortes: ${cortes || '-'}
+- Carne estimada: ~${calc.kgTotal} kg
+
+*LOCAL*
+${endereco}
+
+*ESTIMATIVA*
+- Por pessoa: R$ ${porPessoa.toLocaleString('pt-BR')}
+- Total: R$ ${calc.total.toLocaleString('pt-BR')}
+
+${obs ? '*Observacoes:* ' + obs : ''}`;
+
+    const numero_whatsapp = '5527988540332';
+    const url = 'https://wa.me/' + numero_whatsapp + '?text=' + encodeURIComponent(msg);
+    window.open(url, '_blank');
+  }
+
+
   async function buscarCep() {
     const cepInput = document.getElementById('cep');
     const status   = document.getElementById('cep-status');
