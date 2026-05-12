@@ -1438,9 +1438,10 @@
         return;
       }
       const calc = calcPrice();
+      const porP = Math.round(calc.total / rawQtd);
       document.getElementById('bar-total').textContent  = 'R$ ' + calc.total.toLocaleString('pt-BR');
-      document.getElementById('bar-pessoa').textContent = 'R$ ' + Math.round(calc.total / rawQtd).toLocaleString('pt-BR');
-      document.getElementById('bar-kg').textContent     = 'mão de obra + deslocamento';
+      document.getElementById('bar-pessoa').textContent = 'R$ ' + porP.toLocaleString('pt-BR');
+      document.getElementById('bar-kg').textContent     = rawQtd + ' pessoas · ' + calc.horas + 'h';
       document.getElementById('price-bar-label-kg').textContent = 'Total do serviço';
       return;
     }
@@ -1614,11 +1615,26 @@
     const custoMDO = mdoEvento(qtd, horas);
 
     if (state.servico === 'mdo') {
-      // Somente churrasqueiro: R$100/hora + deslocamento fixo R$50
-      const custoHora = horas * 100;
+      // Faixas acumulativas por pessoa
+      // 1-10: R$5/pessoa  11-20: R$10/pessoa  21-30: R$15/pessoa  31-50: R$20/pessoa
+      function calcMdoPessoas(n) {
+        let v = 0;
+        const faixas = [{max:10,rate:5},{max:20,rate:10},{max:30,rate:15},{max:50,rate:20}];
+        let prev = 0;
+        for (const f of faixas) {
+          if (n <= prev) break;
+          const nesta = Math.min(n, f.max) - prev;
+          v += nesta * f.rate;
+          prev = f.max;
+        }
+        return v;
+      }
+      const custoPessoas = calcMdoPessoas(qtd);
+      const custoHora    = horas * 100;
       const deslocamento = 50;
-      const total = Math.ceil((custoHora + deslocamento) / 10) * 10;
-      return { total, custoMDO: custoHora, deslocamento, horas, kgTotal: '0', paoAlho: 0, modo: 'mdo' };
+      const total = Math.ceil((custoPessoas + custoHora + deslocamento) / 10) * 10;
+      const porPessoa = Math.round(total / qtd);
+      return { total, custoPessoas, custoMDO: custoHora, deslocamento, horas, kgTotal: '0', paoAlho: 0, porPessoa, modo: 'mdo' };
     }
 
     // Modo Experiência Completa
@@ -1728,11 +1744,7 @@
         row('Churrasqueiro profissional', 'incluso') +
         row('Preparo e ponto das carnes', 'incluso') +
         row('Deslocamento', 'incluso') +
-        rowMuted('Carnes, carvão e estrutura', 'por sua conta') +
-        '<div style="border-top:1px solid rgba(224,139,73,0.15);padding-top:10px;margin-top:8px;">' +
-          rowMuted('Mão de obra', 'R$ ' + calc.custoMDO) +
-          rowMuted('Deslocamento', 'R$ ' + calc.deslocamento) +
-        '</div>';
+        rowMuted('Carnes, carvão e estrutura', 'por sua conta');
     } else {
       incluidosHtml =
         row('Carne selecionada (~' + calc.kgTotal + 'kg)', 'incluso') +
