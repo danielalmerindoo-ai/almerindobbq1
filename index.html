@@ -570,6 +570,66 @@
     margin-top: 2px;
   }
 
+
+  /* ══ SELETOR DE SERVIÇO ══ */
+  .servico-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .servico-card {
+    position: relative;
+    border: 2px solid rgba(224,139,73,0.2);
+    border-radius: 14px;
+    padding: 18px 14px 14px;
+    cursor: pointer;
+    transition: all 0.25s;
+    background: var(--carbon-light);
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .servico-card:active { transform: scale(0.97); }
+  .servico-card.selected {
+    border-color: var(--copper);
+    background: rgba(224,139,73,0.08);
+    box-shadow: 0 0 0 1px rgba(224,139,73,0.3);
+  }
+  .servico-card .s-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--copper);
+    color: #1A1A1A;
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .servico-card .s-icon { font-size: 28px; margin-bottom: 8px; display: block; }
+  .servico-card .s-title {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--copper);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .servico-card .s-desc { font-size: 10px; color: var(--muted); line-height: 1.5; }
+  .servico-card.selected .s-desc { color: var(--beige); }
+  .servico-card .s-check {
+    width: 20px; height: 20px; border-radius: 50%;
+    border: 2px solid rgba(224,139,73,0.3);
+    margin: 10px auto 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; color: transparent; transition: all 0.2s;
+  }
+  .servico-card.selected .s-check { background: var(--copper); border-color: var(--copper); color: #1A1A1A; }
+
   /* ══ CEP ══ */
   .cep-row {
     display: flex;
@@ -781,6 +841,95 @@
     color: rgba(154,138,118,0.4);
     border-top: 1px solid rgba(224,139,73,0.08);
   }
+
+  /* ══ PAGAMENTO ══ */
+  .pagamento-box {
+    border: 1px solid rgba(224,139,73,0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .pagamento-header {
+    background: rgba(224,139,73,0.08);
+    border-bottom: 1px solid rgba(224,139,73,0.15);
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .pagamento-header-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .pagamento-header-title {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--copper);
+  }
+  .pagamento-body { padding: 18px; }
+  .pagamento-parcelas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .parcela-card {
+    background: var(--carbon-mid);
+    border-radius: 12px;
+    padding: 14px 12px;
+    text-align: center;
+    border: 1px solid rgba(224,139,73,0.12);
+  }
+  .parcela-pct {
+    font-family: 'Cinzel', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--copper);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .parcela-label {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .parcela-label strong { color: var(--beige); display: block; font-size: 11px; margin-bottom: 2px; }
+  .metodos-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .metodos-grid {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .metodo-item {
+    flex: 1;
+    background: var(--carbon-mid);
+    border: 1px solid rgba(224,139,73,0.12);
+    border-radius: 10px;
+    padding: 10px 6px;
+    text-align: center;
+  }
+  .metodo-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+  .metodo-nome { font-size: 9px; font-weight: 700; color: var(--beige); letter-spacing: 0.5px; text-transform: uppercase; }
+  .pagamento-obs {
+    background: rgba(178,49,42,0.08);
+    border: 1px solid rgba(178,49,42,0.2);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .pagamento-obs strong { color: var(--beige); }
+
 </style>
 </head>
 <body>
@@ -806,7 +955,7 @@
     <div class="step-dot" id="dot5">5</div>
   </div>
   <div class="step-labels">
-    <span class="active" id="lbl1">Evento</span>
+    <span class="active" id="lbl0">Serviço</span>
     <span id="lbl2">Pessoas/Cortes</span>
     <span id="lbl3" style="display:none"></span>
     <span id="lbl4">Local</span>
@@ -817,9 +966,36 @@
 <!-- FORM -->
 <div class="form-wrap">
 
+  <!-- SELETOR DE SERVIÇO -->
+  <div class="step-panel visible" id="panel0">
+    <p class="panel-label">Bem-vindo</p>
+    <h2 class="panel-title">Como posso te ajudar?</h2>
+    <p class="panel-desc">Escolha o tipo de serviço para personalizar seu orçamento.</p>
+
+    <div class="servico-grid" style="margin-top:24px;">
+      <div class="servico-card" id="card-completo" onclick="selecionarServico('completo')">
+        <span class="s-icon">🔥</span>
+        <div class="s-title">Experiência Completa BBQ</div>
+        <div class="s-desc">Carnes, carvão, utensílios e preparo completo. Você só recebe os convidados.</div>
+        <div class="s-check">✓</div>
+      </div>
+      <div class="servico-card" id="card-mdo" onclick="selecionarServico('mdo')">
+        <span class="s-badge">Mais acessível</span>
+        <span class="s-icon">👨‍🍳</span>
+        <div class="s-title">Somente Churrasqueiro</div>
+        <div class="s-desc">Você fornece as carnes e estrutura. Eu cuido do preparo, ponto e experiência BBQ.</div>
+        <div class="s-check">✓</div>
+      </div>
+    </div>
+
+    <div class="btn-row" style="margin-top:28px;">
+      <button class="btn btn-next btn-full" id="btn-avancar-servico" onclick="confirmarServico()" style="opacity:0.4;pointer-events:none;">Continuar →</button>
+    </div>
+  </div>
+
   <!-- STEP 1 — EVENTO -->
-  <div class="step-panel visible" id="panel1">
-    <p class="panel-label">Passo 1 de 5</p>
+  <div class="step-panel" id="panel1">
+    <p class="panel-label">Passo 2 de 5</p>
     <h2 class="panel-title">Qual é o seu evento?</h2>
     <p class="panel-desc">Tipo, data e horário para eu já separar a data pra você.</p>
 
@@ -846,8 +1022,8 @@
     <div class="field">
       <label>Horário de início</label>
       <div class="pill-group" id="horario-group">
-        <div class="pill" data-val="Manha (8h-11h)" onclick="selectPill(this,'horario')">Manha<br><small style="font-size:10px;font-weight:400">(8h-11h)</small></div>
-        <div class="pill" data-val="Almoco (11h-14h)" onclick="selectPill(this,'horario')">Almoco<br><small style="font-size:10px;font-weight:400">(11h-14h)</small></div>
+        <div class="pill" data-val="Manhã (8h-11h)" onclick="selectPill(this,'horario')">Manhã<br><small style="font-size:10px;font-weight:400">(8h-11h)</small></div>
+        <div class="pill" data-val="Almoço (11h-14h)" onclick="selectPill(this,'horario')">Almoço<br><small style="font-size:10px;font-weight:400">(11h-14h)</small></div>
         <div class="pill" data-val="Tarde (14h-17h)" onclick="selectPill(this,'horario')">Tarde<br><small style="font-size:10px;font-weight:400">(14h-17h)</small></div>
         <div class="pill" data-val="Noite (17h-22h)" onclick="selectPill(this,'horario')">Noite<br><small style="font-size:10px;font-weight:400">(17h-22h)</small></div>
       </div>
@@ -860,13 +1036,13 @@
 
   <!-- STEP 2+3 — PESSOAS + CORTES (tela unificada) -->
   <div class="step-panel" id="panel2">
-    <p class="panel-label">Passo 2 de 5</p>
+    <p class="panel-label">Passo 3 de 5</p>
     <h2 class="panel-title">Monte seu churrasco</h2>
     <p class="panel-desc">Ajuste as pessoas e selecione os cortes. O valor atualiza em tempo real.</p>
 
     <!-- PESSOAS -->
     <div class="field">
-      <label>Numero de convidados</label>
+      <label>Número de convidados</label>
 
       <div class="smart-slider-wrap">
         <!-- display central -->
@@ -893,13 +1069,13 @@
         <!-- faixas de referência -->
         <div class="smart-ranges">
           <div class="smart-range" style="left:0%;width:12.5%">
-            <span>Intimo</span>
+            <span>Íntimo</span>
           </div>
           <div class="smart-range" style="left:12.5%;width:12.5%">
             <span>Pequeno</span>
           </div>
           <div class="smart-range" style="left:25%;width:25%">
-            <span>Medio</span>
+            <span>Médio</span>
           </div>
           <div class="smart-range" style="left:50%;width:25%">
             <span>Grande</span>
@@ -913,7 +1089,7 @@
 
     <!-- DURACAO -->
     <div class="field">
-      <label>Duracao do evento</label>
+      <label>Duração do evento</label>
       <div class="pill-group" id="duracao-group">
         <div class="pill" data-val="2 horas" onclick="selectPill(this,'duracao')">2 horas</div>
         <div class="pill" data-val="3 horas" onclick="selectPill(this,'duracao')">3 horas</div>
@@ -924,7 +1100,8 @@
 
     <div class="sep"></div>
 
-    <!-- CORTES -->
+    <!-- BLOCO CORTES (Experiência Completa) -->
+    <div id="bloco-cortes">
     <p class="section-mini-label">Selecione os cortes</p>
     <div class="cuts-grid" id="f-cortes">
       <div class="cut-item" onclick="toggleCut(this)">
@@ -940,7 +1117,7 @@
       <div class="cut-item" onclick="toggleCut(this)">
         <input type="checkbox" value="Chorizo">
         <div class="cut-check">&#10003;</div>
-        <div class="cut-info"><strong>Chorizo</strong><small>Contrafilee suculento</small></div>
+        <div class="cut-info"><strong>Chorizo</strong><small>Contrafilé suculento</small></div>
       </div>
       <div class="cut-item" onclick="toggleCut(this)">
         <input type="checkbox" value="Tulipa de Frango">
@@ -967,8 +1144,25 @@
         <div class="cut-check">&#10003;</div>
         <div class="cut-info"><strong>Fraldinha</strong><small>Fibra grossa, muito saborosa</small></div>
       </div>
+      <div class="cut-item" onclick="toggleCut(this)">
+        <input type="checkbox" value="Pao de Alho">
+        <div class="cut-check">&#10003;</div>
+        <div class="cut-info"><strong>Pão de Alho</strong><small>1 unid. por pessoa (pct c/ 5)</small></div>
+      </div>
     </div>
     <p class="error-msg" id="cortes-error" style="display:none;margin-top:10px;">Selecione pelo menos 1 corte</p>
+    </div><!-- /bloco-cortes -->
+
+    <!-- BLOCO MDO (Somente Churrasqueiro) -->
+    <div id="bloco-mdo" style="display:none;">
+      <p class="section-mini-label">Serviço de churrasqueiro</p>
+      <div style="background:rgba(224,139,73,0.06);border:1px solid rgba(224,139,73,0.18);border-radius:12px;padding:16px;margin-bottom:4px;">
+        <p style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:0;">
+          Você fornece as carnes, a estrutura e a churrasqueira.<br>
+          Eu assumo o <strong style="color:var(--beige);">preparo, ponto, qualidade e a experiência BBQ</strong> do início ao fim.
+        </p>
+      </div>
+    </div>
 
 
 
@@ -985,7 +1179,7 @@
   <div class="step-panel" id="panel4">
     <p class="panel-label">Passo 4 de 5</p>
     <h2 class="panel-title">Onde vai ser?</h2>
-    <p class="panel-desc">Preencha o endereco do evento.</p>
+    <p class="panel-desc">Preencha o endereço do evento.</p>
 
     <!-- CEP -->
     <div style="margin-bottom:22px;">
@@ -1060,7 +1254,7 @@
         <input type="text" id="rua" placeholder="Nome da rua">
       </div>
       <div class="field" id="f-numero" style="flex:1">
-        <label>Numero</label>
+        <label>Número</label>
         <input type="tel" id="numero" placeholder="123" inputmode="numeric">
         <p class="error-msg">Informe</p>
       </div>
@@ -1106,6 +1300,9 @@
 
     <div class="preco-box" id="preco-box"></div>
 
+    <!-- PAGAMENTO -->
+    <div id="pagamento-section" style="margin-bottom:20px;"></div>
+
     <div class="field">
       <label>Observações (opcional)</label>
       <textarea id="obs" placeholder="Espaço coberto, churrasqueira local, pedido especial..."></textarea>
@@ -1124,21 +1321,52 @@
 <!-- BARRA FLUTUANTE DE PRECO -->
 <div class="price-bar" id="price-bar">
   <div class="price-bar-left">
-    <div class="price-bar-label">Por pessoa</div>
-    <div class="price-bar-pessoa" id="bar-pessoa">--</div>
-  </div>
-  <div class="price-bar-right">
-    <div class="price-bar-total-label">Total estimado</div>
+    <div class="price-bar-total-label" id="price-bar-label-kg">Total estimado</div>
     <div class="price-bar-total" id="bar-total">--</div>
     <div class="price-bar-kg" id="bar-kg"></div>
+  </div>
+  <div class="price-bar-right">
+    <div class="price-bar-label">Por pessoa</div>
+    <div class="price-bar-pessoa" id="bar-pessoa">--</div>
   </div>
 </div>
 
 <div class="footer-mark">Almerindo BBQ &nbsp;·&nbsp; Da brasa ao serviço</div>
 
 <script>
-  const state = { horario: '', duracao: '' };
-  let currentStep = 1;
+  const state = { horario: '', duracao: '', servico: '' };
+  let currentStep = 0;
+
+
+  // ── SELEÇÃO DE SERVIÇO ──
+  function selecionarServico(tipo) {
+    state.servico = tipo;
+    document.getElementById('card-completo').classList.toggle('selected', tipo === 'completo');
+    document.getElementById('card-mdo').classList.toggle('selected', tipo === 'mdo');
+    const btn = document.getElementById('btn-avancar-servico');
+    btn.style.opacity = '1';
+    btn.style.pointerEvents = 'auto';
+  }
+
+  function confirmarServico() {
+    if (!state.servico) return;
+    const isMdo = state.servico === 'mdo';
+
+    // Título do passo 2
+    document.querySelector('#panel2 .panel-title').textContent = isMdo ? 'Configure o serviço' : 'Monte seu churrasco';
+    document.querySelector('#panel2 .panel-desc').textContent = isMdo
+      ? 'Informe pessoas e horas. O valor da mão de obra atualiza em tempo real.'
+      : 'Ajuste as pessoas e selecione os cortes. O valor atualiza em tempo real.';
+
+    // Mostra o bloco certo
+    document.getElementById('bloco-cortes').style.display = isMdo ? 'none' : '';
+    document.getElementById('bloco-mdo').style.display    = isMdo ? ''     : 'none';
+
+    // Barra de preço: ajusta label
+    document.getElementById('price-bar-label-kg').textContent = isMdo ? 'Mão de obra + deslocamento' : 'Por pessoa';
+
+    goTo(1);
+  }
 
   function goTo(step) {
     if (step === 3) step = (currentStep < 3) ? 4 : 2; // step 3 merged into step 2
@@ -1149,21 +1377,42 @@
   function showStep(step) {
     document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('visible'));
     document.getElementById('panel' + step).classList.add('visible');
-    for (let i = 1; i <= 5; i++) {
-      const dot = document.getElementById('dot' + i);
-      const lbl = document.getElementById('lbl' + i);
-      dot.classList.remove('active','done');
-      lbl.classList.remove('active');
-      if (i < step)  { dot.classList.add('done'); dot.textContent = '✓'; }
-      else if (i === step) { dot.classList.add('active'); dot.textContent = i; lbl.classList.add('active'); }
-      else { dot.textContent = i; }
+
+    // Atualiza progress bar (dots 1-5, labels lbl2,lbl4,lbl5)
+    if (step > 0) {
+      for (let i = 1; i <= 5; i++) {
+        const dot = document.getElementById('dot' + i);
+        if (!dot) continue;
+        dot.classList.remove('active','done');
+        if (i < step)       { dot.classList.add('done'); dot.textContent = '\u2713'; }
+        else if (i === step) { dot.classList.add('active'); dot.textContent = i; }
+        else                 { dot.textContent = i; }
+      }
+      for (let i = 1; i <= 4; i++) {
+        const line = document.getElementById('line' + i);
+        if (line) line.style.width = i < step ? '100%' : '0%';
+      }
+      // Labels (lbl0=Serviço, lbl2, lbl4, lbl5)
+      ['lbl0','lbl2','lbl4','lbl5'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('active');
+      });
+      // Mapeia step → label
+      const lblMap = {1:'lbl0', 2:'lbl2', 4:'lbl4', 5:'lbl5'};
+      const activeLbl = document.getElementById(lblMap[step]);
+      if (activeLbl) activeLbl.classList.add('active');
+    } else {
+      // panel0: destaca lbl0
+      ['lbl0','lbl2','lbl4','lbl5'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('active');
+      });
+      const l0 = document.getElementById('lbl0');
+      if (l0) l0.classList.add('active');
     }
-    for (let i = 1; i <= 4; i++) {
-      document.getElementById('line' + i).style.width = i < step ? '100%' : '0%';
-    }
+
     if (step === 5) buildResumo();
     currentStep = step;
-    // show price bar on step 2 only
     const bar = document.getElementById('price-bar');
     if (step === 2) { bar.classList.add('visible'); updatePriceBar(); }
     else { bar.classList.remove('visible'); }
@@ -1172,27 +1421,45 @@
 
   // ── LIVE PRICE BAR ──
   function updatePriceBar() {
-    const cortesEl = [...document.querySelectorAll('#f-cortes .cut-item.selected')]
-                       .map(el => el.querySelector('input').value);
-    if (cortesEl.length === 0) {
+    const rawQtd = parseInt(document.getElementById('qtd').value);
+    if (rawQtd === 0) {
       document.getElementById('bar-pessoa').textContent = '--';
       document.getElementById('bar-total').textContent = '--';
       document.getElementById('bar-kg').textContent = '';
       return;
     }
-    const rawQtd = parseInt(document.getElementById('qtd').value);
-    if (rawQtd === 0) {
+
+    if (state.servico === 'mdo') {
+      // MDO: sempre mostra assim que tiver qtd e duração
+      if (!state.duracao) {
+        document.getElementById('bar-pessoa').textContent = '--';
+        document.getElementById('bar-total').textContent = '--';
+        document.getElementById('bar-kg').textContent = 'selecione a duração';
+        return;
+      }
+      const calc = calcPrice();
+      document.getElementById('bar-total').textContent  = 'R$ ' + calc.total.toLocaleString('pt-BR');
+      document.getElementById('bar-pessoa').textContent = 'R$ ' + Math.round(calc.total / rawQtd).toLocaleString('pt-BR');
+      document.getElementById('bar-kg').textContent     = 'mão de obra + deslocamento';
+      document.getElementById('price-bar-label-kg').textContent = 'Total do serviço';
+      return;
+    }
+
+    // Modo completo
+    document.getElementById('price-bar-label-kg').textContent = 'Total estimado';
+    const cortesEl = [...document.querySelectorAll('#f-cortes .cut-item.selected')]
+                       .map(el => el.querySelector('input').value);
+    if (cortesEl.length === 0) {
       document.getElementById('bar-pessoa').textContent = '--';
       document.getElementById('bar-total').textContent = '--';
-      document.getElementById('bar-kg').textContent = '0 convidados';
+      document.getElementById('bar-kg').textContent = 'selecione os cortes';
       return;
     }
     const calc = calcPrice();
-    const qtd  = rawQtd;
-    const porPessoa = Math.round(calc.total / qtd);
-    document.getElementById('bar-pessoa').textContent = 'R$ ' + porPessoa.toLocaleString('pt-BR');
+    const porPessoa = Math.round(calc.total / rawQtd);
     document.getElementById('bar-total').textContent  = 'R$ ' + calc.total.toLocaleString('pt-BR');
-    document.getElementById('bar-kg').textContent     = '~' + calc.kgTotal + 'kg de carne no total';
+    document.getElementById('bar-pessoa').textContent = 'R$ ' + porPessoa.toLocaleString('pt-BR');
+    document.getElementById('bar-kg').textContent     = '~' + calc.kgTotal + 'kg de carne estimada';
   }
 
   function validate(step) {
@@ -1204,10 +1471,13 @@
       setErr('f-data', !data); if (!data) ok = false;
     }
     if (step === 2) {
-      const checked = document.querySelectorAll('#f-cortes .cut-item.selected').length;
-      const errEl = document.getElementById('cortes-error');
-      if (checked === 0) { errEl.style.display = 'block'; ok = false; }
-      else { errEl.style.display = 'none'; }
+      if (state.servico !== 'mdo') {
+        const checked = document.querySelectorAll('#f-cortes .cut-item.selected').length;
+        const errEl = document.getElementById('cortes-error');
+        if (checked === 0) { errEl.style.display = 'block'; ok = false; }
+        else { errEl.style.display = 'none'; }
+      }
+      if (!state.duracao) { ok = false; }
     }
     if (step === 4) {
       const cidade = document.getElementById('cidade').value.trim();
@@ -1286,6 +1556,7 @@
     'Costela':          40.00,  // costela bovina
     'Maminha':          60.00,  // maminha bovina
     'Fraldinha':        60.00,  // fraldinha bovina
+    'Pao de Alho':      0.00,   // calculado separado (pacote c/5, R$20)
   };
 
   // Peso relativo de cada corte (para distribuição proporcional de 400g/pessoa)
@@ -1298,6 +1569,7 @@
     'Costela':          1.4,
     'Maminha':          1.2,
     'Fraldinha':        1.2,
+    'Pao de Alho':      0.0,   // não entra no kg de carne
   };
 
   // Distribui 400g/pessoa proporcionalmente entre os cortes selecionados
@@ -1333,107 +1605,170 @@
   }
 
   function calcPrice() {
-    const qtd   = Math.max(1, parseInt(document.getElementById('qtd').value));
-    const dur   = state.duracao;
-    const cortesEl = [...document.querySelectorAll('#f-cortes .cut-item.selected')]
-                       .map(el => el.querySelector('input').value);
+    const qtd = Math.max(1, parseInt(document.getElementById('qtd').value));
+    const dur = state.duracao;
 
-    // 1. CUSTO DE CARNE — 400g/pessoa distribuídos proporcionalmente
-    const fator = fatorPessoas(qtd);
-    const distKg = kgPorCorte(cortesEl, qtd);
-    let custoCarne = 0;
-    cortesEl.forEach(c => {
-      custoCarne += (PRECO_CORTE[c] || 45) * distKg[c];
-    });
-    custoCarne *= fator;
-
-    // 2. MÃO DE OBRA (fixo por porte + bônus hora extra)
     let horas = 3;
     if (dur.includes('4')) horas = 4;
     else if (dur.includes('5h')) horas = 5;
     const custoMDO = mdoEvento(qtd, horas);
 
-    // 3. MARGEM DE SERVIÇO (30% sobre tudo — cobre gás, carvão, temperos, deslocamento)
-    const subtotal = custoCarne + custoMDO;
-    const margem = subtotal * 0.30;
+    if (state.servico === 'mdo') {
+      // Somente churrasqueiro: R$100/hora + deslocamento fixo R$50
+      const custoHora = horas * 100;
+      const deslocamento = 50;
+      const total = Math.ceil((custoHora + deslocamento) / 10) * 10;
+      return { total, custoMDO: custoHora, deslocamento, horas, kgTotal: '0', paoAlho: 0, modo: 'mdo' };
+    }
 
-    const total = subtotal + margem;
+    // Modo Experiência Completa
+    const cortesEl = [...document.querySelectorAll('#f-cortes .cut-item.selected')]
+                       .map(el => el.querySelector('input').value);
+    const cortesCarne = cortesEl.filter(c => c !== 'Pao de Alho');
+    const temPaoAlho  = cortesEl.includes('Pao de Alho');
+    const custoPaoAlho = temPaoAlho ? Math.ceil(qtd / 5) * 20 : 0;
+    const kgTotal = (0.400 * qtd).toFixed(1);
 
-    // Arredonda para múltiplo de 10
-    return {
-      total:       Math.ceil(total / 10) * 10,
-      custoCarne:  Math.round(custoCarne),
-      custoMDO:    Math.round(custoMDO),
-      horas:       horas,
-      kgTotal:     (0.400 * qtd).toFixed(1),
-    };
+    const fator = fatorPessoas(qtd);
+    const distKg = kgPorCorte(cortesCarne, qtd);
+    let custoCarne = 0;
+    cortesCarne.forEach(c => { custoCarne += (PRECO_CORTE[c] || 45) * distKg[c]; });
+    custoCarne *= fator;
+
+    const subtotal = custoCarne + custoMDO + custoPaoAlho;
+    const total = Math.ceil((subtotal * 1.30) / 10) * 10;
+
+    return { total, custoCarne: Math.round(custoCarne), custoMDO: Math.round(custoMDO), horas, kgTotal, paoAlho: custoPaoAlho, modo: 'completo' };
+  }
+
+
+  // ── SEÇÃO DE PAGAMENTO ──
+  function buildPagamento() {
+    const isMdo = state.servico === 'mdo';
+    const entrada = isMdo ? '30%' : '50%';
+    const restante = isMdo ? '70%' : '50%';
+    const descricao = isMdo
+      ? 'Contratação simples e flexível. Você só paga o restante após o evento.'
+      : 'Seu evento reservado com segurança. Saldo pago após a finalização.';
+
+    document.getElementById('pagamento-section').innerHTML =
+      '<div class="pagamento-box">' +
+        '<div class="pagamento-header">' +
+          '<span class="pagamento-header-icon">🔐</span>' +
+          '<span class="pagamento-header-title">Condições de pagamento</span>' +
+        '</div>' +
+        '<div class="pagamento-body">' +
+          '<p style="font-size:11px;color:var(--muted);margin-bottom:14px;line-height:1.5;">' + descricao + '</p>' +
+          '<div class="pagamento-parcelas">' +
+            '<div class="parcela-card">' +
+              '<div class="parcela-pct">' + entrada + '</div>' +
+              '<div class="parcela-label"><strong>No fechamento</strong>reserva confirmada</div>' +
+            '</div>' +
+            '<div class="parcela-card">' +
+              '<div class="parcela-pct">' + restante + '</div>' +
+              '<div class="parcela-label"><strong>Após o evento</strong>serviço concluído</div>' +
+            '</div>' +
+          '</div>' +
+          '<p class="metodos-label">Formas de pagamento</p>' +
+          '<div class="metodos-grid">' +
+            '<div class="metodo-item"><span class="metodo-icon">⚡</span><span class="metodo-nome">PIX</span></div>' +
+            '<div class="metodo-item"><span class="metodo-icon">💵</span><span class="metodo-nome">Dinheiro</span></div>' +
+            '<div class="metodo-item"><span class="metodo-icon">💳</span><span class="metodo-nome">Crédito</span></div>' +
+          '</div>' +
+          '<div class="pagamento-obs">⚠ <strong>Cartão de crédito:</strong> taxa de juros por conta do contratante.</div>' +
+        '</div>' +
+      '</div>';
   }
 
   function buildResumo() {
     const tipo   = document.getElementById('tipo').value;
     const data   = document.getElementById('data').value;
     const qtd    = document.getElementById('qtd').value;
+    const qtdN   = parseInt(qtd) || 1;
     const cidade = document.getElementById('cidade') ? document.getElementById('cidade').value : '';
     const bairro = document.getElementById('bairro') ? document.getElementById('bairro').value : '';
     const rua    = document.getElementById('rua')    ? document.getElementById('rua').value    : '';
     const numero = document.getElementById('numero') ? document.getElementById('numero').value : '';
     const compl  = document.getElementById('complemento') ? document.getElementById('complemento').value : '';
-    const estado = document.getElementById('estado') ? document.getElementById('estado').value : (document.getElementById('estado-sel') ? document.getElementById('estado-sel').value : '');
+    const estado = document.getElementById('estado') ? document.getElementById('estado').value : '';
     const nome   = document.getElementById('nome').value;
     const tel    = document.getElementById('telefone').value;
     const cortes = [...document.querySelectorAll('#f-cortes .cut-item.selected')]
-                     .map(el => el.querySelector('input').value).join(', ');
+                     .map(el => el.querySelector('input').value)
+                     .filter(v => v !== 'Pao de Alho').join(', ');
     const dataFmt = data ? new Date(data + 'T12:00:00').toLocaleDateString('pt-BR') : '—';
-    const calc = calcPrice();
+    const calc    = calcPrice();
+    const isMdo   = state.servico === 'mdo';
+    const porPessoa = Math.round(calc.total / qtdN);
+    const local = rua + (numero ? ', ' + numero : '') + (compl ? ' ' + compl : '') + (bairro ? ' — ' + bairro : '') + (cidade ? ', ' + cidade + '/' + estado : '');
 
-    document.getElementById('resumo-box').innerHTML = `
-      <div class="resumo-title">📋 Detalhes do pedido</div>
-      <div class="resumo-row"><span class="resumo-key">Nome</span><span class="resumo-val">${nome}</span></div>
-      <div class="resumo-row"><span class="resumo-key">WhatsApp</span><span class="resumo-val">${tel}</span></div>
-      <div class="resumo-row"><span class="resumo-key">Evento</span><span class="resumo-val">${tipo}</span></div>
-      <div class="resumo-row"><span class="resumo-key">Data</span><span class="resumo-val">${dataFmt}</span></div>
-      <div class="resumo-row"><span class="resumo-key">Horário</span><span class="resumo-val">${state.horario || '—'}</span></div>
-      <div class="resumo-row"><span class="resumo-key">Duração</span><span class="resumo-val">${state.duracao || '—'} </span></div>
-      <div class="resumo-row"><span class="resumo-key">Convidados</span><span class="resumo-val">${qtd} pessoas</span></div>
-      <div class="resumo-row"><span class="resumo-key">Cortes</span><span class="resumo-val">${cortes || '—'}</span></div>
-      <div class="resumo-row"><span class="resumo-key">Carne estimada</span><span class="resumo-val">~${calc.kgTotal} kg</span></div>
-      <div class="resumo-row"><span class="resumo-key">Local</span><span class="resumo-val">${rua}${numero ? ', ' + numero : ''}${compl ? ' ' + compl : ''} — ${bairro}${cidade ? ', ' + cidade + '/' + estado : ''}</span></div>
-    `;
+    // ── RESUMO DE DETALHES ──
+    document.getElementById('resumo-box').innerHTML =
+      '<div class="resumo-title">Detalhes do pedido</div>' +
+      '<div class="resumo-row"><span class="resumo-key">Serviço</span><span class="resumo-val" style="color:var(--copper);">' + (isMdo ? 'Somente Churrasqueiro' : 'Experiência Completa BBQ') + '</span></div>' +
+      '<div class="resumo-row"><span class="resumo-key">Nome</span><span class="resumo-val">' + nome + '</span></div>' +
+      '<div class="resumo-row"><span class="resumo-key">WhatsApp</span><span class="resumo-val">' + tel + '</span></div>' +
+      '<div class="resumo-row"><span class="resumo-key">Evento</span><span class="resumo-val">' + tipo + '</span></div>' +
+      '<div class="resumo-row"><span class="resumo-key">Data</span><span class="resumo-val">' + dataFmt + '</span></div>' +
+      '<div class="resumo-row"><span class="resumo-key">Horário</span><span class="resumo-val">' + (state.horario || '—') + '</span></div>' +
+      '<div class="resumo-row"><span class="resumo-key">Duração</span><span class="resumo-val">' + (state.duracao || '—') + '</span></div>' +
+      '<div class="resumo-row"><span class="resumo-key">Convidados</span><span class="resumo-val">' + qtd + ' pessoas</span></div>' +
+      (isMdo
+        ? '<div class="resumo-row"><span class="resumo-key">Carnes</span><span class="resumo-val" style="color:var(--muted);">fornecidas por você</span></div>'
+        : '<div class="resumo-row"><span class="resumo-key">Cortes</span><span class="resumo-val">' + (cortes || '—') + '</span></div>' +
+          '<div class="resumo-row"><span class="resumo-key">Carne estimada</span><span class="resumo-val">~' + calc.kgTotal + ' kg</span></div>' +
+          (calc.paoAlho > 0 ? '<div class="resumo-row"><span class="resumo-key">Pão de alho</span><span class="resumo-val">' + Math.ceil(qtdN/5) + ' pct · R$ ' + calc.paoAlho + '</span></div>' : '')
+      ) +
+      '<div class="resumo-row"><span class="resumo-key">Local</span><span class="resumo-val">' + local + '</span></div>';
 
-    const porPessoa = Math.round(calc.total / parseInt(document.getElementById('qtd').value));
-    document.getElementById('preco-box').innerHTML = `
-      <p class="preco-label">Investimento por pessoa</p>
-      <p class="preco-valor">R$ ${porPessoa.toLocaleString('pt-BR')}</p>
-      <p style="font-size:12px;color:var(--muted);margin-top:6px;margin-bottom:20px;">por convidado · ${qtd} pessoas</p>
+    // ── BLOCO DE PREÇO ──
+    var incluidosHtml = '';
+    if (isMdo) {
+      incluidosHtml =
+        row('Churrasqueiro profissional', 'incluso') +
+        row('Preparo e ponto das carnes', 'incluso') +
+        row('Deslocamento', 'incluso') +
+        rowMuted('Carnes, carvão e estrutura', 'por sua conta') +
+        '<div style="border-top:1px solid rgba(224,139,73,0.15);padding-top:10px;margin-top:8px;">' +
+          rowMuted('Mão de obra', 'R$ ' + calc.custoMDO) +
+          rowMuted('Deslocamento', 'R$ ' + calc.deslocamento) +
+        '</div>';
+    } else {
+      incluidosHtml =
+        row('Carne selecionada (~' + calc.kgTotal + 'kg)', 'incluso') +
+        row('Churrasqueiro profissional', 'incluso') +
+        row('Carvão, gás e temperos', 'incluso') +
+        row('Deslocamento', 'incluso') +
+        (calc.paoAlho > 0 ? row('Pão de alho (' + Math.ceil(qtdN/5) + ' pct)', 'incluso') : '');
+    }
 
-      <div style="border-top:1px solid rgba(224,139,73,0.2);padding-top:16px;margin-bottom:4px;">
-        <p style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;text-align:left;">O que está incluído</p>
-        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--beige);margin-bottom:10px;text-align:left;">
-          <span>🥩 Carne selecionada (~${calc.kgTotal}kg)</span>
-          <span style="color:var(--copper);font-weight:600;">incluso</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--beige);margin-bottom:10px;text-align:left;">
-          <span>👨‍🍳 Churrasqueiro profissional</span>
-          <span style="color:var(--copper);font-weight:600;">incluso</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--beige);margin-bottom:10px;text-align:left;">
-          <span>🔥 Carvão, gás e temperos</span>
-          <span style="color:var(--copper);font-weight:600;">incluso</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--beige);margin-bottom:10px;text-align:left;">
-          <span>🚗 Deslocamento</span>
-          <span style="color:var(--copper);font-weight:600;">incluso</span>
-        </div>
-      </div>
+    document.getElementById('preco-box').innerHTML =
+      '<p class="preco-label">Investimento por pessoa</p>' +
+      '<p class="preco-valor">R$ ' + porPessoa.toLocaleString('pt-BR') + '</p>' +
+      '<p style="font-size:12px;color:var(--muted);margin-top:6px;margin-bottom:20px;">por convidado · ' + qtd + ' pessoas</p>' +
+      '<div style="border-top:1px solid rgba(224,139,73,0.2);padding-top:16px;margin-bottom:4px;">' +
+        '<p style="font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;text-align:left;">O que está incluído</p>' +
+        incluidosHtml +
+      '</div>' +
+      '<div style="border-top:1px solid rgba(224,139,73,0.2);padding-top:14px;margin-top:4px;display:flex;justify-content:space-between;align-items:center;">' +
+        '<span style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);">Total estimado</span>' +
+        '<span style="font-size:18px;font-weight:700;color:var(--beige);">R$ ' + calc.total.toLocaleString('pt-BR') + '</span>' +
+      '</div>' +
+      (isMdo ? '<p style="font-size:10px;color:var(--muted);margin-top:4px;text-align:right;">mão de obra + deslocamento · ' + calc.horas + 'h</p>' : '') +
+      '<p class="preco-obs" style="margin-top:12px;font-size:10px;">Estimativa com base nos precos do mercado da Grande Vitoria/ES (mai/2026). Valor final confirmado por mim pelo WhatsApp.</p>';
 
-      <div style="border-top:1px solid rgba(224,139,73,0.2);padding-top:12px;display:flex;justify-content:space-between;align-items:center;">
-        <span style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);">Total estimado</span>
-        <span style="font-family:'Cinzel',serif;font-size:20px;font-weight:700;color:var(--copper);">R$ ${calc.total.toLocaleString('pt-BR')}</span>
-      </div>
-
-      <p class="preco-obs" style="margin-top:12px;font-size:10px;">⚠️ Estimativa com base nos preços do mercado da Grande Vitória/ES (mai/2026). Valor final confirmado por mim pelo WhatsApp.</p>
-    `;
+    buildPagamento();
   }
+
+  function row(label, val) {
+    return '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--beige);margin-bottom:10px;">' +
+      '<span>' + label + '</span><span style="color:var(--copper);font-weight:600;">' + val + '</span></div>';
+  }
+  function rowMuted(label, val) {
+    return '<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:6px;">' +
+      '<span>' + label + '</span><span>' + val + '</span></div>';
+  }
+
 
   // ── ENVIO WHATSAPP ──
   function enviarWhatsApp() {
@@ -1469,9 +1804,12 @@
 - Duracao: ${state.duracao || '-'}
 - Convidados: ${qtd} pessoas
 
-*CARDAPIO*
+${state.servico === 'mdo' ? `*SERVICO*
+- Tipo: Somente Churrasqueiro
+- Mao de obra: R$ ${calc.custoMDO}
+- Deslocamento: R$ ${calc.deslocamento}` : `*CARDAPIO*
 - Cortes: ${cortes || '-'}
-- Carne estimada: ~${calc.kgTotal} kg
+- Carne estimada: ~${calc.kgTotal} kg${calc.paoAlho > 0 ? '\n- Pao de alho: ' + Math.ceil(parseInt(qtd)/5) + ' pacotes' : ''}`}
 
 *LOCAL*
 ${endereco}
